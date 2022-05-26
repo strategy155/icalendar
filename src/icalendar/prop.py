@@ -339,7 +339,13 @@ class vDDDTypes(object):
             return vPeriod.from_ical(ical)
 
         if len(ical) in (15, 16):
-            return vDatetime.from_ical(ical, timezone=timezone)
+            try:
+                return vDatetime.from_ical(ical, timezone=timezone)
+            except ValueError:
+                # remove trailing zero, which is unknown nature actually
+                ical = ical[:-2]
+                return vDatetime.from_ical(ical, timezone=timezone)
+
         elif len(ical) == 8:
             return vDate.from_ical(ical)
         elif len(ical) in (6, 7):
