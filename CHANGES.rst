@@ -1,22 +1,146 @@
 Changelog
 =========
 
+5.0.4 (unreleased)
+------------------
 
-4.0.10 (unreleased)
--------------------
+Minor changes:
+
+- ...
 
 Breaking changes:
 
-- *add item here*
+- ...
 
 New features:
 
-- *add item here*
+- ...
 
 Bug fixes:
 
-- *add item here*
+- ...
 
+
+5.0.3 (2022-11-03)
+------------------
+
+New features:
+
+- vDDDTypes is hashable #487 #492 [niccokunzmann]
+
+Bug fixes:
+
+- vDDDTypes' equality also checks the dt attribute #497 #492 [niccokunzmann]
+
+5.0.2 (2022-11-03)
+------------------
+
+Minor changes:
+
+- Refactored cal.py, tools.py and completed remaining minimal refactoring in parser.py. Ref: #481 [pronoym99]
+- Calendar.from_ical no longer throws long errors
+  Ref: #473
+  Fixes: #472
+  [jacadzaca]
+- Make datetime value shorter by removing the value parameter where possible.
+  Fixes: #318
+  [jacadzaca], [niccokunzmann]
+
+New features:
+
+- source code in documentation is tested using doctest #445 [niccokunzmann]
+
+Bug fixes:
+
+- broken properties are not added to the parent component
+  Ref: #471
+  Fixes: #464
+  [jacadzaca]
+
+5.0.1 (2022-10-22)
+------------------
+
+Minor changes:
+
+- fixed setuptools deprecation warnings [mgorny]
+
+Bug fixes:
+
+- a well-known timezone timezone prefixed with a `/` is treated as if the slash wasn't present
+  Ref: #467
+  Fixes: #466
+  [jacadzaca]
+
+5.0.0 (2022-10-17)
+------------------
+
+Minor changes:
+
+- removed deprecated test checks [tuergeist]
+- Fix: cli does not support DURATION #354 [mamico]
+- Add changelog and contributing to readthedocs documentation #428 [peleccom]
+- fixed small typos #323 [rohnsha0]
+- unittest to parametrized pytest refactoring [jacadzaca]
+
+Breaking changes:
+
+- Require Python 3.7 as minimum Python version.  [maurits] [niccokunzmann]
+- icalendar now takes a ics file directly as an input
+- icalendar's CLI utility program's output is different
+- Drop Support for Python 3.6. Versions 3.7 - 3.11 are supported and tested.
+
+New features:
+
+- icalendar utility outputs a 'Duration' row
+- icalendar can take multiple ics files as an input
+
+Bug fixes:
+
+- Changed tools.UIDGenerator instance methods to static methods
+  Ref: #345
+  [spralja]
+- proper handling of datetime objects with `tzinfo` generated through zoneinfo.ZoneInfo.
+  Ref: #334
+  Fixes: #333
+  [tobixen]
+- Timestamps in UTC does not need tzid
+  Ref: #338
+  Fixes: #335
+  [tobixen]
+-  add ``__eq__`` to ``icalendar.prop.vDDDTypes`` #391 [jacadzaca]
+- Refactor deprecated unittest aliases for Python 3.11 compatibility #330 [tirkarthi]
+
+5.0.0a1 (2022-07-11)
+--------------------
+
+Breaking changes:
+
+- Drop support for Python 3.4, 3.5 and PyPy2.  [maurits]
+
+New features:
+
+- Document development setup
+  Ref: #358
+  [niccokunzmann]
+
+Bug fixes:
+
+- Test with GitHub Actions.  [maurits]
+
+4.1.0 (2022-07-11)
+------------------
+
+New features:
+
+- No longer test on Python 3.4, 3.5 and PyPy2, because we cannot get it to work.
+  Technically it should still work, it is just no longer tested.
+  Do not expect much development on branch 4.x anymore.
+  The master branch will be for the remaining Python versions that we support.
+  [maurits]
+
+Bug fixes:
+
+- Test with GitHub Actions.  [maurits]
 
 4.0.9 (2021-10-16)
 ------------------
@@ -64,7 +188,6 @@ Bug fixes:
 Bug fixes:
 
 - Fixed a docs issue related to building on Read the Docs [davidfischer]
-
 
 4.0.4 (2019-11-25)
 ------------------
@@ -651,9 +774,9 @@ Fixes:
 - created sphinx documentation and started documenting development and goals.
   [garbas]
 
-- hook out github repository to http://readthedocs.org service so sphinx
+- hook out github repository to https://readthedocs.org service so sphinx
   documentation is generated on each commit (for master). Documentation can be
-  visible on: http://readthedocs.org/docs/icalendar/en/latest/
+  visible on: https://icalendar.readthedocs.io/en/latest/
   [garbas]
 
 

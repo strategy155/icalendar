@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from datetime import datetime
 from datetime import timedelta
 import unittest
@@ -96,7 +93,7 @@ class TestCalComponent(unittest.TestCase):
             b'BEGIN:VCALENDAR\r\nATTENDEE:Max M\r\nEND:VCALENDAR\r\n'
         )
 
-        # Components can be nested, so You can add a subcompont. Eg a calendar
+        # Components can be nested, so You can add a subcomponent. Eg a calendar
         # holds events.
         e = Component(summary='A brief history of time')
         e.name = 'VEVENT'
@@ -230,12 +227,12 @@ class TestCalComponent(unittest.TestCase):
 
         lines = comp.to_ical().splitlines()
         self.assertTrue(
-            b"DTSTART;TZID=Europe/Vienna;VALUE=DATE-TIME:20101010T100000"
+            b"DTSTART;TZID=Europe/Vienna:20101010T100000"
             in lines)
-        self.assertTrue(b"CREATED;VALUE=DATE-TIME:20101010T120000Z" in lines)
-        self.assertTrue(b"DTSTAMP;VALUE=DATE-TIME:20101010T120000Z" in lines)
+        self.assertTrue(b"CREATED:20101010T120000Z" in lines)
+        self.assertTrue(b"DTSTAMP:20101010T120000Z" in lines)
         self.assertTrue(
-            b"LAST-MODIFIED;VALUE=DATE-TIME:20101010T160000Z" in lines
+            b"LAST-MODIFIED:20101010T160000Z" in lines
         )
 
     def test_cal_Component_add_no_reencode(self):
@@ -391,7 +388,7 @@ class TestCal(unittest.TestCase):
         self.assertEqual(
             cal.subcomponents[0].to_ical(),
             b'BEGIN:VEVENT\r\nSUMMARY:Python meeting about calendaring\r\n'
-            + b'DTSTART;VALUE=DATE-TIME:20050404T080000\r\nUID:42\r\n'
+            + b'DTSTART:20050404T080000\r\nUID:42\r\n'
             + b'END:VEVENT\r\n')
 
         # Write to disc

@@ -1,16 +1,15 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from datetime import date
 from datetime import datetime
 from datetime import time
 from datetime import timedelta
 from icalendar.parser import Parameters
 import unittest
-from icalendar.prop import vDatetime
+from icalendar.prop import vDatetime, vDDDTypes
 from icalendar.windows_to_olson import WINDOWS_TO_OLSON
-
+import pytest
 import pytz
+from copy import deepcopy
+from dateutil import tz
 
 
 class TestProp(unittest.TestCase):
@@ -499,6 +498,39 @@ class TestProp(unittest.TestCase):
             'Rasmussen, Max M\xf8ller'
         )
 
+
+
+vDDDTypes_list = [
+    vDDDTypes(pytz.timezone('US/Eastern').localize(datetime(year=2022, month=7, day=22, hour=12, minute=7))),
+    vDDDTypes(datetime(year=2022, month=7, day=22, hour=12, minute=7)),
+    vDDDTypes(datetime(year=2022, month=7, day=22, hour=12, minute=7, tzinfo=tz.UTC)),
+    vDDDTypes(date(year=2022, month=7, day=22)),
+    vDDDTypes(date(year=2022, month=7, day=23)),
+    vDDDTypes(time(hour=22, minute=7, second=2))
+]
+
+def identity(x):
+    return x
+
+@pytest.mark.parametrize("map", [
+    deepcopy,
+    identity,
+    hash,
+])
+@pytest.mark.parametrize("v_type", vDDDTypes_list)
+@pytest.mark.parametrize("other", vDDDTypes_list)
+def test_vDDDTypes_equivalance(map, v_type, other):
+    if v_type is other:
+        assert map(v_type) == map(other), f"identity implies equality: {map.__name__}()"
+        assert not (map(v_type) != map(other)), f"identity implies equality: {map.__name__}()"
+    else:
+        assert map(v_type) != map(other), f"expected inequality: {map.__name__}()"
+        assert not (map(v_type) == map(other)), f"expected inequality: {map.__name__}()"
+
+@pytest.mark.parametrize("v_type", vDDDTypes_list)
+def test_inequality_with_different_types(v_type):
+    assert v_type != 42
+    assert v_type != 'test'
 
 class TestPropertyValues(unittest.TestCase):
 
