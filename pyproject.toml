@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "icalendar"
-version = "4.0.9"
+version = "5.0.4"
 description = ""
 authors = ["Mark <strategy155@gmail.com>"]
 
