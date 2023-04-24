@@ -102,7 +102,10 @@ def param_value(value):
     """
     if isinstance(value, SEQUENCE_TYPES):
         return q_join(value)
-    return dquote(value)
+    elif isinstance(value, str):
+        return dquote(value)
+    else:
+        return dquote(value.to_ical().decode(DEFAULT_ENCODING))
 
 
 # Could be improved
@@ -334,6 +337,8 @@ class Contentline(str):
             if not name:
                 raise ValueError('Key name is required')
             validate_token(name)
+            if not value_split:
+                value_split = i + 1
             if not name_split or name_split + 1 == value_split:
                 raise ValueError('Invalid content line')
             params = Parameters.from_ical(st[name_split + 1: value_split],

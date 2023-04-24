@@ -1,7 +1,7 @@
 Changelog
 =========
 
-5.0.4 (unreleased)
+5.0.6 (unreleased)
 ------------------
 
 Minor changes:
@@ -20,8 +20,34 @@ Bug fixes:
 
 - ...
 
+5.0.5 (2023-04-13)
+------------------
 
-5.0.3 (2022-11-03)
+Minor changes:
+
+- Added support for BYWEEKDAY in vRecur ref: #268 
+
+Bug fixes:
+
+- Fix problem with ORGANIZER in FREE/BUSY #348
+
+5.0.4 (2022-12-29)
+------------------
+
+Minor changes:
+
+- Improved documentation
+  Ref: #503, #504 
+
+Bug fixes:
+
+- vBoolean can now be used as an parameter
+  Ref: #501
+  Fixes: #500
+  [jacadzaca]
+
+
+5.0.3 (2022-11-23)
 ------------------
 
 New features:
