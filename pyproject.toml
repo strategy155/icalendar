@@ -10,6 +10,10 @@ authors = ["Mark <strategy155@gmail.com>"]
 python = "^3.9"
 pytz = "^2023.3"
 python-dateutil = "^2.8.2"
+pandas = { version = "^2.0.1", optional = true}
+
+[tool.poetry.extras]
+pandas = ["pandas"]
 
 [tool.poetry.dev-dependencies]
 
