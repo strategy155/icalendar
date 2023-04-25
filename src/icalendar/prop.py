@@ -60,6 +60,7 @@ import base64
 import binascii
 import pytz
 import re
+import pandas
 import time as _time
 
 
@@ -270,6 +271,9 @@ class vCategory:
 
     def to_ical(self):
         return b",".join([c.to_ical() for c in self.cats])
+
+    def to_pandas(self):
+        return pandas.Categorical(values=self.cats)
 
     @staticmethod
     def from_ical(ical):
