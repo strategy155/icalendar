@@ -273,6 +273,9 @@ class vCategory:
         return b",".join([c.to_ical() for c in self.cats])
 
     def to_pandas(self):
+        """
+        Simple conversion to categorical variable dtype
+        """
         return pandas.Categorical(values=self.cats)
 
     @staticmethod
