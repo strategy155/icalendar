@@ -272,11 +272,11 @@ class vCategory:
     def to_ical(self):
         return b",".join([c.to_ical() for c in self.cats])
 
-    def to_pandas(self):
+    def to_value(self):
         """
-        Simple conversion to categorical variable dtype
+        Simple conversion to the underlying list
         """
-        return pandas.Categorical(values=self.cats)
+        return self.cats
 
     @staticmethod
     def from_ical(ical):
@@ -332,6 +332,13 @@ class vDDDTypes:
 
     def __hash__(self):
         return hash(self.dt)
+
+    def to_value(self):
+        """
+        This function is used to return pythonic value of this object
+        """
+        return self.dt
+
 
     @classmethod
     def from_ical(cls, ical, timezone=None):
@@ -738,6 +745,12 @@ class vText(str):
     def to_ical(self):
         return escape_char(self).encode(self.encoding)
 
+    def to_value(self):
+        """
+        This function is created to return the value of this class
+        """
+        return self
+
     @classmethod
     def from_ical(cls, ical):
         ical_unesc = unescape_char(ical)
@@ -789,6 +802,12 @@ class vUri(str):
             return cls(ical)
         except Exception:
             raise ValueError(f'Expected , got: {ical}')
+
+    def to_value(self):
+        """
+        This function is created to return the value of this obj
+        """
+        return self
 
 
 class vGeo:

@@ -3,34 +3,32 @@ import unittest
 import pandas
 
 
-class TestPandas(unittest.TestCase):
+class TestValueConversion(unittest.TestCase):
     """
     This class is used to test new pandas interface functionality
     """
-    def test_pandas_vCategory(self):
+    def test_vText_val(self):
         """
-        we check here if vCategory to pandas method works correctly
+        We check here, if to_val method is working correctly in vtext
         """
-        from ..prop import vCategory
+        from ..prop import vText
 
-        # simple categories set
-        catz = ['cat 1', 'cat 2', 'cat 3']
+        # Creating sample text
+        sample_text = "Simple text"
 
-        # converting them to ical vCategory
-        v_cat = vCategory(catz)
+        # Wrapping it in vtext
+        sample_vtext = vText(sample_text)
 
-        # converting them to pandas directly
-        pd_catz = pandas.Categorical(values=catz)
+        # getting the to_value value
+        sample_vtext_value = sample_vtext.to_value()
 
-        # converting v_cat through to_pandas mechanism
-        v_cat_pd = v_cat.to_pandas()
+        # checking if they are equal
+        self.assertEqual(sample_text, sample_vtext_value)
 
-        # testing if they are equal
-        self.assertTrue(v_cat_pd.equals(pd_catz))
 
-    def test_pandas_vCategory(self):
+    def test_vCategory_val(self):
         """
-        we check here if vCategory to pandas method works correctly
+        we check here if vCategory to_value method works correctly
         """
         from ..prop import vCategory
 
@@ -40,12 +38,9 @@ class TestPandas(unittest.TestCase):
         # converting them to ical vCategory
         v_cat = vCategory(catz)
 
-        # converting them to pandas directly
-        pd_catz = pandas.Categorical(values=catz)
-
-        # converting v_cat through to_pandas mechanism
-        v_cat_pd = v_cat.to_pandas()
+        # getting the pure value
+        v_cat_val = v_cat.to_value()
 
         # testing if they are equal
-        self.assertTrue(v_cat_pd.equals(pd_catz))
+        self.assertEqual(catz, v_cat_val)
 
