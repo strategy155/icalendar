@@ -335,8 +335,10 @@ class vDDDTypes:
 
     def to_value(self):
         """
-        This function is used to return pythonic value of this object
+        This function is used to return pythonic value of this object, it is usually datetime like object,
+        but in case of period, it is tuple of two datetime like objects
         """
+
         return self.dt
 
 
