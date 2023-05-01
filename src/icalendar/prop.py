@@ -274,9 +274,9 @@ class vCategory:
 
     def to_value(self):
         """
-        Simple conversion to the underlying list
+        Simple conversion to the underlying list with conversion of all vtexts
         """
-        return self.cats
+        return [cat.to_value() for cat in self.cats]
 
     @staticmethod
     def from_ical(ical):
