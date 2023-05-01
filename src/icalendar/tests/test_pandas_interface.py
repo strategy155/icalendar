@@ -95,7 +95,7 @@ class TestValueConversion(unittest.TestCase):
 
         # getting the to_value value
         sample_vtext_value = sample_vtext.to_value()
-
+        print(sample_vtext_value)
         # checking if they are equal
         self.assertEqual(sample_text, sample_vtext_value)
 

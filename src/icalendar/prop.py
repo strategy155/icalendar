@@ -749,9 +749,9 @@ class vText(str):
 
     def to_value(self):
         """
-        This function is created to return the value of this class
+        This function is created to return the string value of this class
         """
-        return self
+        return str(self)
 
     @classmethod
     def from_ical(cls, ical):
