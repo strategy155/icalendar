@@ -431,9 +431,13 @@ class vDatetime:
             try:
                 tzinfo = pytz.timezone(timezone.strip('/'))
             except pytz.UnknownTimeZoneError:
-                if timezone in WINDOWS_TO_OLSON:
+
+                # sometimes the strings are arriving with lowercase tzs
+                capital_cased_timezone = timezone.title()
+
+                if capital_cased_timezone in WINDOWS_TO_OLSON:
                     tzinfo = pytz.timezone(
-                        WINDOWS_TO_OLSON.get(timezone.strip('/')))
+                        WINDOWS_TO_OLSON.get(capital_cased_timezone.strip('/')))
                 else:
                     tzinfo = _timezone_cache.get(timezone, None)
 

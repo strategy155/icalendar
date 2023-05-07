@@ -575,6 +575,14 @@ class TestWindowsOlsonMapping(unittest.TestCase):
             pytz.timezone('America/New_York').localize(datetime(2017, 5, 7, 18, 19, 20))
         )
 
+    def test_uncased_timezone(self):
+        """Test if the timezone uncased and converted to capital case work"""
+        self.assertEqual(
+            vDatetime.from_ical('20170507T181920', 'eastern standard time'),
+            pytz.timezone('America/New_York').localize(datetime(2017, 5, 7, 18, 19, 20))
+        )
+
+
     def test_all(self):
         """test if all mappings actually map to valid pytz tzids"""
         for olson in WINDOWS_TO_OLSON.values():
