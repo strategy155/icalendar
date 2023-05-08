@@ -10,6 +10,8 @@ try:
 except:
     from backports import zoneinfo
 
+import pickle
+
 class TestTimezoned(unittest.TestCase):
 
     def test_create_from_ical_zoneinfo(self):
@@ -301,6 +303,23 @@ class TestTimezoneCreation(unittest.TestCase):
             (datetime.timedelta(-1, 68400), datetime.timedelta(0), 'EST'),
             tz._tzinfos.keys()
         )
+
+    def test_custom_tz_pickle(self):
+        """testing America/New_York, the most complex example from the
+        RFC"""
+
+        directory = os.path.dirname(__file__)
+        with open(os.path.join(directory, 'america_new_york.ics'), 'rb') as fp:
+            data = fp.read()
+        cal = icalendar.Calendar.from_ical(data)
+
+        tz = cal.walk('VEVENT')[0]['DTSTART'][0].dt.tzinfo
+        self.assertEqual(str(tz), 'custom_America/New_York')
+
+        cal_pickled = pickle.dumps(cal)
+        cal_loaded = pickle.loads(cal_pickled)
+        print(cal_loaded)
+
 
     def test_create_pacific_fiji(self):
         """testing Pacific/Fiji, another pretty complex example with more than

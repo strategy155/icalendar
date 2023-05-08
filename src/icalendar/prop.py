@@ -430,7 +430,7 @@ class vDatetime:
         if timezone:
             try:
                 tzinfo = pytz.timezone(timezone.strip('/'))
-            except pytz.UnknownTimeZoneError:
+            except pytz.UnknownTimeZoneError as timezone_error:
 
                 # sometimes the strings are arriving with lowercase tzs
                 capital_cased_timezone = timezone.title()
@@ -439,7 +439,11 @@ class vDatetime:
                     tzinfo = pytz.timezone(
                         WINDOWS_TO_OLSON.get(capital_cased_timezone.strip('/')))
                 else:
-                    tzinfo = _timezone_cache.get(timezone, None)
+                    # TODO: THIS IS DESTROYING CUSTOM TZ INTENTIONALLY
+                    raise timezone_error
+
+                    # I do not know how to do this properly
+                    # tzinfo = _timezone_cache.get(timezone, None)
 
         try:
             timetuple = (
